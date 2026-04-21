@@ -2,10 +2,10 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent news desk',
+    tagline: 'Media release intelligence',
   },
   footer: {
-    tagline: 'Simple publishing for press-style updates',
+    tagline: 'Distribution, coverage, and newsroom visibility',
   },
   hero: {
     badge: 'Latest updates',
@@ -29,13 +29,13 @@ export const siteContent = {
   },
   home: {
     metadata: {
-      title: 'Latest updates and newsroom posts',
+      title: 'Mediyao Presswire | Media distribution and press releases',
       description:
-        'Read the latest updates, announcements, and stories through a simple archive-first publishing experience.',
-      openGraphTitle: 'Latest updates and newsroom posts',
+        'Mediyao.com publishes press releases with modern distribution insights, media reach signals, and fast newsroom discovery.',
+      openGraphTitle: 'Mediyao Presswire',
       openGraphDescription:
-        'A simple publishing template for updates, announcements, and readable article pages.',
-      keywords: ['newsroom posts', 'latest updates', 'announcements', 'press articles'],
+        'Official releases, company announcements, and newsroom-ready updates from Mediyao.',
+      keywords: ['media press release', 'newswire', 'press release distribution', 'media coverage', 'Mediyao'],
     },
     introBadge: 'About',
     introTitle: 'A quiet publishing template made for regular updates.',
@@ -75,7 +75,7 @@ export const siteContent = {
     },
   },
   taskSectionHeading: 'Latest posts',
-  taskSectionDescriptionSuffix: 'Read the newest published updates.',
+  taskSectionDescriptionSuffix: 'Read the newest published releases.',
 } as const
 
 export const taskPageMetadata: Record<Exclude<TaskKey, 'comment' | 'org' | 'social'>, { title: string; description: string }> = {
@@ -108,8 +108,8 @@ export const taskPageMetadata: Record<Exclude<TaskKey, 'comment' | 'org' | 'soci
     description: 'Open PDFs and downloadable files.',
   },
   mediaDistribution: {
-    title: 'Latest updates',
-    description: 'Read the latest published updates and announcements.',
+    title: 'Press Releases',
+    description: 'Browse official press releases and distribution-ready media updates.',
   },
 }
 
@@ -128,10 +128,10 @@ export const taskIntroCopy: Record<
   comment: { title: 'Comments', paragraphs: ['Commentary and response posts.'], links: [{ label: 'Home', href: '/' }] },
   org: { title: 'Organizations', paragraphs: ['Organization pages and entities.'], links: [{ label: 'Home', href: '/' }] },
   mediaDistribution: {
-    title: 'Latest updates',
+    title: 'Press Releases',
     paragraphs: [
-      'This archive is designed for straightforward publishing: regular updates, announcements, and media-style posts presented in a clean reading format.',
-      'The layout stays simple so visitors can scan headlines quickly, open stories easily, and move through the archive without distraction.',
+      'This newsroom archive is designed for high-clarity announcements, media distribution posts, and official press releases.',
+      'Use filters, search, and date controls to quickly find releases by topic and publication window.',
     ],
     links: [
       { label: 'Home', href: '/' },

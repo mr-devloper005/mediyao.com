@@ -62,6 +62,7 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
   const Icon = taskIcons[task] || LayoutGrid
 
   const isDark = ['image-masonry', 'image-portfolio', 'profile-creator'].includes(layoutKey)
+  const isMediaDistribution = task === 'mediaDistribution'
   const ui = isDark
     ? {
         muted: 'text-slate-300',
@@ -85,6 +86,35 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
           input: 'border border-slate-200 bg-white text-slate-950',
           button: 'bg-slate-950 text-white hover:bg-slate-800',
         }
+
+  if (isMediaDistribution) {
+    return (
+      <div className="min-h-screen bg-[#f7f9ff]">
+        <NavbarShell />
+        <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <section className="mb-10 overflow-hidden rounded-[2rem] border border-[#ebd4c6] bg-[linear-gradient(130deg,#0c1744_0%,#1d1c60_48%,#2a0f2f_100%)] p-7 text-white shadow-[0_24px_64px_rgba(2,6,23,0.2)] sm:p-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-200">News / Press Release Listing</p>
+            <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
+              Find announcements by category, date, and headline keywords.
+            </h1>
+            <p className="mt-4 max-w-2xl text-sm leading-8 text-slate-200">
+              The Mediyao newsroom feed is optimized for fast scanning by journalists, partners, and research teams.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link href="/pricing" className="inline-flex rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold hover:bg-[#a00a0a]">
+                Compare distribution plans
+              </Link>
+              <Link href="/contact" className="inline-flex rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold hover:bg-white/16">
+                Contact press support
+              </Link>
+            </div>
+          </section>
+          <TaskListClient task={task} initialPosts={posts} category={normalizedCategory} enhancedFilters />
+        </main>
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <div className={`min-h-screen ${shellClass}`}>

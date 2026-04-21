@@ -81,7 +81,10 @@ const cardStyles = {
   },
 } as const
 
-const getVariantForTask = (taskKey: TaskKey) => SITE_THEME.cards[taskKey] || 'listing-elevated'
+const getVariantForTask = (taskKey: TaskKey) => {
+  if (taskKey === 'mediaDistribution') return 'listing-elevated'
+  return SITE_THEME.cards[taskKey] || 'listing-elevated'
+}
 
 export function TaskPostCard({
   post,
@@ -106,9 +109,10 @@ export function TaskPostCard({
   const variant = taskKey || 'listing'
   const visualVariant = cardStyles[getVariantForTask(variant)]
   const isBookmarkVariant = variant === 'sbm' || variant === 'social'
-  const imageAspect = variant === 'image' ? 'aspect-[4/5]' : variant === 'article' ? 'aspect-[16/10]' : variant === 'pdf' ? 'aspect-[4/5]' : variant === 'classified' ? 'aspect-[16/11]' : 'aspect-[4/3]'
+  const isMediaDistribution = variant === 'mediaDistribution'
+  const imageAspect = isMediaDistribution ? 'aspect-[16/9]' : variant === 'image' ? 'aspect-[4/5]' : variant === 'article' ? 'aspect-[16/10]' : variant === 'pdf' ? 'aspect-[4/5]' : variant === 'classified' ? 'aspect-[16/11]' : 'aspect-[4/3]'
   const altText = `${post.title} ${category} ${variant === 'listing' ? 'business listing' : variant} image`
-  const imageSizes = variant === 'article' ? '(max-width: 640px) 90vw, (max-width: 1024px) 48vw, 420px' : variant === 'image' ? '(max-width: 640px) 82vw, (max-width: 1024px) 34vw, 320px' : '(max-width: 640px) 85vw, (max-width: 1024px) 42vw, 340px'
+  const imageSizes = isMediaDistribution ? '(max-width: 640px) 94vw, (max-width: 1024px) 48vw, 430px' : variant === 'article' ? '(max-width: 640px) 90vw, (max-width: 1024px) 48vw, 420px' : variant === 'image' ? '(max-width: 640px) 82vw, (max-width: 1024px) 34vw, 320px' : '(max-width: 640px) 85vw, (max-width: 1024px) 42vw, 340px'
 
   const { recipe } = getFactoryState()
   const isDirectoryProduct = recipe.homeLayout === 'listing-home' || recipe.homeLayout === 'classified-home'
@@ -178,6 +182,28 @@ export function TaskPostCard({
           <h3 className={`mt-3 line-clamp-2 text-lg font-semibold leading-snug group-hover:opacity-85 ${visualVariant.title}`}>{post.title}</h3>
           <p className={`mt-2 line-clamp-3 text-sm leading-7 ${visualVariant.muted}`}>{getExcerpt(content.description || post.summary, compact ? 120 : 180) || 'Explore this bookmark.'}</p>
           {content.email ? <div className={`mt-3 inline-flex items-center gap-1 text-xs ${visualVariant.muted}`}><Mail className="h-3.5 w-3.5" />{content.email}</div> : null}
+        </div>
+      </Link>
+    )
+  }
+
+  if (isMediaDistribution) {
+    return (
+      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.6rem] border border-[#f0d7c8] bg-white shadow-[0_16px_42px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(15,23,42,0.12)]">
+        <div className="relative aspect-[16/9] overflow-hidden">
+          <ContentImage src={image} alt={altText} fill sizes={imageSizes} quality={75} className="object-cover transition-transform duration-500 group-hover:scale-[1.04]" intrinsicWidth={960} intrinsicHeight={720} />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0c163f]/70 to-transparent" />
+          <span className="absolute left-4 top-4 rounded-full bg-[#C40C0C] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
+            {category}
+          </span>
+        </div>
+        <div className="flex flex-1 flex-col p-5">
+          <h3 className="line-clamp-2 text-xl font-semibold leading-snug text-[#111827]">{post.title}</h3>
+          <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-600">{getExcerpt(content.description || post.summary, 165) || 'Read the full release.'}</p>
+          <div className="mt-4 text-xs text-slate-500">
+            {new Date(post.publishedAt || post.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </div>
+          <div className="mt-auto pt-4 text-sm font-semibold text-[#C40C0C]">Read release</div>
         </div>
       </Link>
     )
