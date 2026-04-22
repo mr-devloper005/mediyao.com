@@ -17,37 +17,37 @@ export async function TaskListPageOverride(_: { task: TaskKey; category?: string
   const recent = posts.slice(0, 5)
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900">
+    <div className="min-h-screen bg-[#f7f9ff] text-[#0f172a]">
       <NavbarShell />
       <main className="mx-auto grid max-w-6xl gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-14">
           {posts.map((post) => (
-            <article key={post.id} className="border-b border-neutral-200 pb-12">
-              <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500">{String((post.content as any)?.category || 'Update')}</p>
-              <h1 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-black uppercase leading-tight tracking-[0.02em] sm:text-4xl">{post.title}</h1>
-              <div className="mt-4 flex items-center justify-center gap-3 text-sm text-neutral-500">
-                <span className="bg-neutral-800 px-3 py-1 text-white">{new Date(post.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                <span>by {post.authorName || 'Editorial Desk'}</span>
+            <article key={post.id} className="border-b border-[#efd8ca] pb-12">
+              <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#CC561E]">{String((post.content as any)?.category || 'Update')}</p>
+              <h1 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-black uppercase leading-tight tracking-[0.02em] text-[#0f172a] sm:text-4xl">{post.title}</h1>
+              <div className="mt-4 flex items-center justify-center gap-3 text-sm text-slate-600">
+                <span className="bg-[#0d1b49] px-3 py-1 text-white">{new Date(post.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                <span>by {post.authorName || 'Editorial desk'}</span>
               </div>
-              <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-neutral-700">{excerpt(post.summary)}</p>
+              <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-slate-700">{excerpt(post.summary)}</p>
               <div className="mt-8 text-center">
-                <Link href={`/updates/${post.slug}`} className="inline-flex rounded-full bg-neutral-800 px-8 py-3 text-sm font-medium text-white hover:bg-black">Continue Reading</Link>
+                <Link href={`/updates/${post.slug}`} className="inline-flex rounded-full bg-[#C40C0C] px-8 py-3 text-sm font-medium text-white hover:bg-[#a00a0a]">Continue Reading</Link>
               </div>
             </article>
           ))}
         </div>
         <aside className="space-y-6">
-          <div className="border border-neutral-200 p-6">
+          <div className="rounded-xl border border-[#efd8ca] bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
             <div className="flex items-center gap-0">
-              <input className="h-12 flex-1 border border-neutral-200 px-4 text-sm outline-none" placeholder="Type here to search" />
-              <button className="flex h-12 w-12 items-center justify-center bg-neutral-800 text-white">Q</button>
+              <input className="h-12 flex-1 border border-[#ecd2c1] px-4 text-sm outline-none" placeholder="Type here to search" />
+              <button className="flex h-12 w-12 items-center justify-center bg-[#0d1b49] text-white">Q</button>
             </div>
           </div>
-          <div className="border border-neutral-200 p-6">
+          <div className="rounded-xl border border-[#efd8ca] bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
             <div className="space-y-5">
               {recent.map((post) => (
-                <Link key={post.id} href={`/updates/${post.slug}`} className="block border-b border-neutral-200 pb-5 last:border-b-0 last:pb-0">
-                  <p className="text-base leading-7 text-neutral-700">{post.title}</p>
+                <Link key={post.id} href={`/updates/${post.slug}`} className="block border-b border-[#f0dfd4] pb-5 last:border-b-0 last:pb-0">
+                  <p className="text-base leading-7 text-[#0f172a]">{post.title}</p>
                 </Link>
               ))}
             </div>

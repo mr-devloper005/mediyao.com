@@ -8,6 +8,15 @@ import { ArrowRight, BarChart3, Globe2, Sparkles, TrendingUp } from 'lucide-reac
 
 export const HOME_PAGE_OVERRIDE_ENABLED = true
 
+const stockImages = [
+  'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1400',
+  'https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1400',
+  'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1400',
+  'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1400',
+  'https://images.pexels.com/photos/7688460/pexels-photo-7688460.jpeg?auto=compress&cs=tinysrgb&w=1400',
+  'https://images.pexels.com/photos/6804065/pexels-photo-6804065.jpeg?auto=compress&cs=tinysrgb&w=1400',
+]
+
 function excerpt(text?: string | null) {
   const value = (text || '').trim()
   if (!value) return 'Read the full release for complete details.'
@@ -100,7 +109,7 @@ export async function HomePageOverride() {
                   </Link>
                 </div>
                 <div className="relative min-h-[260px] lg:min-h-full">
-                  <ContentImage src={(Array.isArray(featured.media) && featured.media[0]?.url) || '/placeholder.svg?height=760&width=1100'} alt={featured.title} fill className="object-cover" />
+                  <ContentImage src={(Array.isArray(featured.media) && featured.media[0]?.url) || stockImages[0]} alt={featured.title} fill className="object-cover" />
                 </div>
               </div>
             </article>
@@ -117,8 +126,16 @@ export async function HomePageOverride() {
               </Link>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {archive.map((post) => (
+              {archive.map((post, index) => (
                 <article key={post.id} className="rounded-[1.6rem] border border-[#f1d7c8] bg-white p-6 shadow-[0_14px_38px_rgba(15,23,42,0.07)] transition hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(15,23,42,0.1)]">
+                  <div className="relative mb-4 h-40 overflow-hidden rounded-xl">
+                    <ContentImage
+                      src={(Array.isArray(post.media) && post.media[0]?.url) || stockImages[(index + 1) % stockImages.length]}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#CC561E]">
                     {String((post.content as any)?.category || 'Press release')}
                   </p>
