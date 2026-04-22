@@ -64,6 +64,44 @@ export default function LoginPage() {
   const productKind = getProductKind(recipe)
   const config = getLoginConfig(productKind)
   const Icon = config.icon
+  const isPresswire = recipe.primaryTask === 'mediaDistribution'
+
+  if (isPresswire) {
+    return (
+      <div className="min-h-screen bg-[#f7f9ff] text-[#0f172a]">
+        <NavbarShell />
+        <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <section className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="rounded-[1.8rem] border border-[#efd8ca] bg-white p-7 shadow-[0_14px_36px_rgba(15,23,42,0.08)]">
+              <h1 className="text-4xl font-semibold tracking-[-0.04em]">Sign In</h1>
+              <form className="mt-6 grid gap-4">
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Username" />
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Password" type="password" />
+                <button type="submit" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#0d1b49] px-6 text-sm font-semibold text-white hover:bg-[#13296b]">
+                  Sign In
+                </button>
+              </form>
+              <Link href="/forgot-password" className="mt-4 inline-block text-sm text-[#C40C0C] hover:underline">Forgot username or password?</Link>
+            </div>
+            <div className="rounded-[1.8rem] border border-[#efd8ca] bg-[#fff9f4] p-7">
+              <h2 className="text-3xl font-semibold tracking-[-0.03em]">Promote Your Business</h2>
+              <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-700">
+                <li>Find prospects, journalists, and influencers faster.</li>
+                <li>Increase search and media visibility.</li>
+                <li>Generate stronger social engagement.</li>
+                <li>Manage your online brand reputation.</li>
+                <li>Stimulate new revenue streams.</li>
+              </ul>
+              <Link href="/register" className="mt-7 inline-flex rounded-xl border border-[#0d1b49] bg-white px-5 py-3 text-sm font-semibold text-[#0d1b49] hover:bg-slate-50">
+                Create Free Account
+              </Link>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <div className={`min-h-screen ${config.shell}`}>

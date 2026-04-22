@@ -107,6 +107,103 @@ export function Navbar() {
   }))
   const primaryTask = SITE_CONFIG.tasks.find((task) => task.key === recipe.primaryTask && task.enabled) || primaryNavigation[0]
   const isDirectoryProduct = recipe.homeLayout === 'listing-home' || recipe.homeLayout === 'classified-home'
+  const isPresswireProduct = recipe.primaryTask === 'mediaDistribution'
+
+  if (isPresswireProduct) {
+    const pressNav = [
+      { name: 'Home', href: '/' },
+      { name: primaryTask?.label || 'Press Releases', href: '/press-release' },
+      { name: 'Pricing', href: '/pricing' },
+      { name: 'Sign In', href: '/signin' },
+      { name: 'Sign Up', href: '/signup' },
+      { name: 'Contact', href: '/contact' },
+    ]
+
+    return (
+      <header className="sticky top-0 z-50 w-full border-b border-[#e9d5c9] bg-[#0d1b49] text-white shadow-[0_8px_24px_rgba(2,6,23,0.2)]">
+        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          <div className="flex min-w-0 items-center gap-4 lg:gap-7">
+            <Link href="/" className="flex shrink-0 items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/25 bg-white/10 p-1.5">
+                <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="44" height="44" className="h-full w-full object-contain" />
+              </div>
+              <div className="hidden min-w-0 sm:block">
+                <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
+                <span className="block text-[10px] uppercase tracking-[0.24em] text-slate-300">{siteContent.navbar.tagline}</span>
+              </div>
+            </Link>
+            <div className="hidden items-center gap-2 xl:flex">
+              {pressNav.map((item) => {
+                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      'rounded-full px-4 py-2 text-sm font-semibold transition',
+                      isActive ? 'bg-white text-[#0d1b49]' : 'text-slate-200 hover:bg-white/12 hover:text-white'
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <Button variant="ghost" size="icon" asChild className="hidden rounded-full text-white hover:bg-white/10 hover:text-white md:flex">
+              <Link href="/search">
+                <Search className="h-5 w-5" />
+                <span className="sr-only">Search</span>
+              </Link>
+            </Button>
+            {isAuthenticated ? (
+              <NavbarAuthControls />
+            ) : (
+              <div className="hidden items-center gap-2 md:flex">
+                <Button variant="ghost" size="sm" asChild className="rounded-full px-4 text-white hover:bg-white/10 hover:text-white">
+                  <Link href="/login">Sign In</Link>
+                </Button>
+                <Button size="sm" asChild className="rounded-full bg-[#C40C0C] text-white hover:bg-[#a00a0a]">
+                  <Link href="/register">Submit Release</Link>
+                </Button>
+              </div>
+            )}
+            <Button variant="ghost" size="icon" className="rounded-full text-white hover:bg-white/10 hover:text-white lg:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
+        </nav>
+
+        {isMobileMenuOpen && (
+          <div className="border-t border-white/10 bg-[#0a1640]">
+            <div className="space-y-2 px-4 py-4">
+              <Link href="/search" onClick={() => setIsMobileMenuOpen(false)} className="mb-3 flex items-center gap-3 rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm font-semibold text-slate-200">
+                <Search className="h-4 w-4" />
+                Search releases
+              </Link>
+              {pressNav.map((item) => {
+                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      'flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold',
+                      isActive ? 'bg-white text-[#0d1b49]' : 'border border-white/12 bg-white/8 text-slate-200'
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        )}
+      </header>
+    )
+  }
 
   if (isDirectoryProduct) {
     const palette = directoryPalette[(recipe.brandPack === 'market-utility' ? 'market-utility' : 'directory-clean') as keyof typeof directoryPalette]

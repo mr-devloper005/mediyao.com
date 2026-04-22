@@ -50,6 +50,7 @@ export default function ContactPage() {
 
   const { recipe } = getFactoryState()
   const productKind = getProductKind(recipe)
+  const isPresswire = recipe.primaryTask === 'mediaDistribution'
   const tone = getTone(productKind)
   const lanes =
     productKind === 'directory'
@@ -75,6 +76,67 @@ export default function ContactPage() {
               { icon: Mail, title: 'Resource partnerships', body: 'Coordinate curation projects, reference pages, and link programs.' },
               { icon: Sparkles, title: 'Curator support', body: 'Need help organizing shelves, collections, or profile-connected boards?' },
             ]
+
+  if (isPresswire) {
+    return (
+      <div className="min-h-screen bg-[#f7f9ff]">
+        <NavbarShell />
+        <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <section className="mb-10 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#CC561E]">Mediyao Press Support</p>
+            <h1 className="mt-3 text-5xl font-semibold tracking-[-0.05em] text-[#0f172a]">Contact Us</h1>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-slate-600">
+              Reach our support desk for distribution planning, newsroom questions, and media partnership requests.
+            </p>
+          </section>
+          <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="rounded-[2rem] border border-[#f0d8c8] bg-white p-6 shadow-[0_18px_46px_rgba(15,23,42,0.08)] sm:p-8">
+              <form className="grid gap-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Contact Name *" />
+                  <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Phone Number" />
+                </div>
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Email *" />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <select className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm text-slate-600">
+                    <option>What type of organization are you?</option>
+                    <option>Agency</option>
+                    <option>Business</option>
+                    <option>Publisher</option>
+                    <option>Journalist</option>
+                  </select>
+                  <select className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm text-slate-600">
+                    <option>Subject: How may we help you?</option>
+                    <option>Distribution support</option>
+                    <option>Pricing & plans</option>
+                    <option>Media partnership</option>
+                  </select>
+                </div>
+                <textarea className="min-h-[180px] rounded-2xl border border-[#ecd2c1] px-4 py-3 text-sm" placeholder="Message / Comment *" />
+                <button type="submit" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#C40C0C] px-6 text-sm font-semibold text-white hover:bg-[#a00a0a]">
+                  Submit Now
+                </button>
+              </form>
+            </div>
+            <aside className="space-y-5">
+              {[
+                ['Telephone Hours', 'Monday to Friday\n8:30am to 5:00pm (PDT)'],
+                ['Toll Free Telephone', '1-888-880-9539\n(646) 417-8294'],
+                ['US Address', 'Suite 1400 - 505 Second Avenue\nSeattle, WA\n98104, USA'],
+                ['Canada Address', 'Suite 203 - 901 West 3rd St\nNorth Vancouver, BC\nV7P 3P9, Canada'],
+              ].map(([title, body]) => (
+                <div key={title} className="rounded-[1.3rem] border border-[#f0d8c8] bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
+                  <h2 className="text-lg font-semibold text-[#0f172a]">{title}</h2>
+                  <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600">{body}</p>
+                </div>
+              ))}
+            </aside>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <div className={`min-h-screen ${tone.shell}`}>
