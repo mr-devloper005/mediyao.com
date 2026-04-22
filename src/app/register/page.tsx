@@ -63,7 +63,53 @@ export default function RegisterPage() {
   const { recipe } = getFactoryState()
   const productKind = getProductKind(recipe)
   const config = getRegisterConfig(productKind)
-  const Icon = config.icon
+  const isPresswire = recipe.primaryTask === 'mediaDistribution'
+
+  if (isPresswire) {
+    return (
+      <div className="min-h-screen bg-[#f7f9ff] text-[#0f172a]">
+        <NavbarShell />
+        <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <section className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+            <div className="rounded-[1.8rem] border border-[#efd8ca] bg-white p-7 shadow-[0_14px_36px_rgba(15,23,42,0.08)]">
+              <h1 className="text-4xl font-semibold tracking-[-0.04em]">Create a New Account</h1>
+              <p className="mt-3 text-sm leading-7 text-slate-600">
+                Create a free account to submit press releases through the Mediyao distribution platform.
+              </p>
+              <form className="mt-6 grid gap-4">
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Company" />
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Email" />
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Phone" />
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Website" />
+                <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Choose Username" />
+                <div className="grid grid-cols-2 gap-3">
+                  <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Password" type="password" />
+                  <input className="h-12 rounded-xl border border-[#ecd2c1] px-4 text-sm" placeholder="Confirm" type="password" />
+                </div>
+                <button type="submit" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#0d1b49] px-6 text-sm font-semibold text-white hover:bg-[#13296b]">
+                  Sign Up
+                </button>
+              </form>
+            </div>
+            <div className="rounded-[1.8rem] border border-[#efd8ca] bg-[#fff9f4] p-7">
+              <h2 className="text-3xl font-semibold tracking-[-0.03em]">Promote Your Business</h2>
+              <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-700">
+                <li>Be found by prospects, journalists, and influencers.</li>
+                <li>Increase search engine visibility.</li>
+                <li>Generate social media engagement.</li>
+                <li>Manage your online reputation.</li>
+                <li>Stimulate new revenue streams.</li>
+              </ul>
+              <Link href="/login" className="mt-7 inline-flex rounded-xl border border-[#0d1b49] bg-white px-5 py-3 text-sm font-semibold text-[#0d1b49] hover:bg-slate-50">
+                Already have an account?
+              </Link>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <div className={`min-h-screen ${config.shell}`}>

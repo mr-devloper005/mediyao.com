@@ -60,6 +60,66 @@ export function Footer() {
   const { recipe } = getFactoryState()
   const enabledTasks = SITE_CONFIG.tasks.filter((task) => task.enabled)
   const primaryTask = enabledTasks.find((task) => task.key === recipe.primaryTask) || enabledTasks[0]
+  const isPresswireProduct = recipe.primaryTask === 'mediaDistribution'
+
+  if (isPresswireProduct) {
+    return (
+      <footer className="border-t border-[#f0d7c8] bg-[linear-gradient(180deg,#09153f_0%,#0e225f_100%)] text-white">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="grid gap-9 lg:grid-cols-[1.15fr_0.85fr_0.85fr_0.85fr]">
+            <div>
+              <Link href="/" className="flex items-center gap-3">
+                <div className="h-11 w-11 overflow-hidden rounded-full border border-white/20 bg-white/8 p-1">
+                  <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="44" height="44" className="h-full w-full object-contain" />
+                </div>
+                <div>
+                  <span className="block text-lg font-semibold">{SITE_CONFIG.name}</span>
+                  <span className="text-xs uppercase tracking-[0.24em] text-slate-300">{siteContent.footer.tagline}</span>
+                </div>
+              </Link>
+              <p className="mt-5 max-w-sm text-sm leading-7 text-slate-200">
+                Media distribution platform for press releases, official announcements, and newsroom-ready company updates.
+              </p>
+              <Link href="/pricing" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold hover:bg-[#a00a0a]">
+                Compare plans
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">Platform</h3>
+              <ul className="mt-4 space-y-3 text-sm text-slate-100">
+                <li><Link href="/updates" className="hover:text-white">Press Releases</Link></li>
+                <li><Link href="/search" className="hover:text-white">Search</Link></li>
+                <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
+                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">Company</h3>
+              <ul className="mt-4 space-y-3 text-sm text-slate-100">
+                <li><Link href="/about" className="hover:text-white">About</Link></li>
+                <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
+                <li><Link href="/press" className="hover:text-white">Press</Link></li>
+                <li><Link href="/status" className="hover:text-white">Status</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">Legal</h3>
+              <ul className="mt-4 space-y-3 text-sm text-slate-100">
+                <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
+                <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
+                <li><Link href="/cookies" className="hover:text-white">Cookies</Link></li>
+                <li><Link href="/licenses" className="hover:text-white">Licenses</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 border-t border-white/15 pt-6 text-sm text-slate-300">
+            &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    )
+  }
 
   if (recipe.footer === 'minimal-footer') {
     return (

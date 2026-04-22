@@ -1,7 +1,7 @@
 import { ContentImage } from "@/components/shared/content-image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Globe, Phone, Tag, Mail } from "lucide-react";
+import { MapPin, Globe, Phone, Tag, Mail, CalendarDays, UserCircle2, Share2 } from "lucide-react";
 import { NavbarShell } from "@/components/shared/navbar-shell";
 import { Footer } from "@/components/shared/footer";
 import { TaskPostCard } from "@/components/shared/task-post-card";
@@ -143,6 +143,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
   const content = getContent(post);
   const isClassified = task === "classified";
   const isArticle = task === "article";
+  const isPressRelease = task === "mediaDistribution";
   const category = content.category || post.tags?.[0] || taskConfig?.label || task;
   const description = content.description || post.summary || "Details coming soon.";
   const descriptionHtml = !isArticle ? formatRichHtml(description, "Details coming soon.") : "";
@@ -167,7 +168,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
   const images = getImageUrls(post, content);
   const mapEmbedUrl = buildMapEmbedUrl(content.latitude, content.longitude, location);
   const isBookmark = task === "sbm" || task === "social";
-  const hideSidebar = isClassified || isArticle || task === "image" || isBookmark;
+  const hideSidebar = isClassified || isArticle || isPressRelease || task === "image" || isBookmark;
   const related = (await fetchTaskPosts(task, 6))
     .filter((item) => item.slug !== post.slug)
     .filter((item) => {
@@ -226,6 +227,8 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
   const schemaPayload = articleSchema ? [articleSchema, breadcrumbSchema] : breadcrumbSchema;
   const { recipe } = getFactoryState();
   const productKind = getProductKind(recipe);
+  const encodedUrl = encodeURIComponent(articleUrl);
+  const encodedTitle = encodeURIComponent(post.title);
 
   if (productKind === "directory" && (task === "listing" || task === "classified" || task === "profile")) {
     return (
@@ -266,14 +269,30 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
           )}
         >
           <div className={cn(isClassified ? "space-y-8" : "")}>
-            {isArticle ? (
+            {isArticle || isPressRelease ? (
               <div className="mx-auto w-full max-w-4xl space-y-6">
+                {isPressRelease ? (
+                  <p className="inline-flex rounded-full bg-[#F6CE71]/35 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#8a3a18]">
+                    Official press release
+                  </p>
+                ) : null}
                 <h1 className="text-4xl font-semibold leading-tight text-foreground">
                   {post.title}
                 </h1>
+                {isPressRelease && articleSummary ? (
+                  <p className="text-lg leading-8 text-slate-600">{articleSummary}</p>
+                ) : null}
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
-                  <span>By {articleAuthor}</span>
-                  {articleDate ? <span>{articleDate}</span> : null}
+                  <span className="inline-flex items-center gap-1.5">
+                    <UserCircle2 className="h-4 w-4" />
+                    {articleAuthor}
+                  </span>
+                  {articleDate ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays className="h-4 w-4" />
+                      {articleDate}
+                    </span>
+                  ) : null}
                   <Badge variant="secondary" className="inline-flex items-center gap-1">
                     <Tag className="h-3.5 w-3.5" />
                     {category}
@@ -288,7 +307,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
                     ))}
                   </div>
                 ) : null}
-                {articleSummary ? (
+                {!isPressRelease && articleSummary ? (
                   <p className="text-base leading-7 text-muted-foreground">{articleSummary}</p>
                 ) : null}
                 {images[0] ? (
@@ -301,6 +320,36 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
                       intrinsicWidth={1600}
                       intrinsicHeight={900}
                     />
+                  </div>
+                ) : null}
+                {isPressRelease ? (
+                  <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-[#f0d7c8] bg-[#fff7f2] p-3">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#CC561E]">
+                      <Share2 className="h-3.5 w-3.5" />
+                      Share
+                    </span>
+                    <a
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-[#eccfbe] bg-white px-3 py-1.5 text-xs font-semibold text-[#0f172a] hover:bg-[#f8ede5]"
+                    >
+                      LinkedIn
+                    </a>
+                    <a
+                      href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-[#eccfbe] bg-white px-3 py-1.5 text-xs font-semibold text-[#0f172a] hover:bg-[#f8ede5]"
+                    >
+                      X
+                    </a>
+                    <a
+                      href={`mailto:?subject=${encodedTitle}&body=${encodedUrl}`}
+                      className="rounded-full border border-[#eccfbe] bg-white px-3 py-1.5 text-xs font-semibold text-[#0f172a] hover:bg-[#f8ede5]"
+                    >
+                      Email
+                    </a>
                   </div>
                 ) : null}
                 <RichContent html={articleHtml} className="leading-8 prose-p:my-6 prose-h2:my-8 prose-h3:my-6 prose-ul:my-6" />
