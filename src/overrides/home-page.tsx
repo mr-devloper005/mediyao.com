@@ -27,6 +27,28 @@ export async function HomePageOverride() {
   const posts = await fetchTaskPosts('mediaDistribution', 9, { fresh: true })
   const featured = posts[0]
   const archive = posts.slice(1, 7)
+  const spotlight = posts[7] || posts[2] || featured
+  const insightCards = posts.slice(0, 4)
+  const testimonialCards = [
+    {
+      quote:
+        'Mediyao helped our startup turn one launch update into repeat pickups across niche and mainstream outlets.',
+      name: 'Ananya Patel',
+      role: 'PR Lead, Northwell Labs',
+    },
+    {
+      quote:
+        'The release template and analytics made our communication workflow faster and easier to report internally.',
+      name: 'Rohan Mehta',
+      role: 'Communications Manager, VistaraX',
+    },
+    {
+      quote:
+        'Instead of publishing and hoping, we now track engagement and iterate our headlines release by release.',
+      name: 'Mira Kapoor',
+      role: 'Brand Strategist, SignalCraft',
+    },
+  ]
 
   return (
     <div className="min-h-screen bg-[#f7f9ff] text-[#0f172a]">
@@ -152,6 +174,113 @@ export async function HomePageOverride() {
               ))}
             </div>
           </div>
+
+          {spotlight ? (
+            <section className="mt-14 grid overflow-hidden rounded-[2rem] border border-[#ecd6ca] bg-white shadow-[0_20px_54px_rgba(15,23,42,0.08)] lg:grid-cols-[0.95fr_1.05fr]">
+              <div className="relative min-h-[280px]">
+                <ContentImage
+                  src={(Array.isArray(spotlight.media) && spotlight.media[0]?.url) || stockImages[2]}
+                  alt={spotlight.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-7 sm:p-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#CC561E]">Spotlight story</p>
+                <h3 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-[#111827]">
+                  {spotlight.title}
+                </h3>
+                <p className="mt-4 text-sm leading-8 text-slate-600">{excerpt(spotlight.summary)}</p>
+                <ul className="mt-6 space-y-2 text-sm text-slate-700">
+                  <li>Release pages optimized for journalists and aggregators.</li>
+                  <li>Structured metadata for stronger discovery and indexing.</li>
+                  <li>Editorial-quality layout tuned for quick scanning.</li>
+                </ul>
+                <Link href={`/updates/${spotlight.slug}`} className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#a00a0a]">
+                  Read spotlight release
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </section>
+          ) : null}
+
+          <section className="mt-14 rounded-[2rem] bg-[#2f0a64] px-6 py-8 text-white sm:px-8">
+            <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/75">Platform highlights</p>
+                <h3 className="mt-2 text-3xl font-semibold tracking-[-0.03em]">
+                  One newsroom workflow for publishing, distribution, and performance tracking.
+                </h3>
+              </div>
+              <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#2f0a64]">
+                Book a demo
+              </Link>
+            </div>
+          </section>
+
+          <section className="mt-14">
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#CC561E]">Resources and insights</p>
+                <h3 className="mt-2 text-3xl font-semibold tracking-[-0.03em] text-[#0f172a]">Learn from current release trends</h3>
+              </div>
+              <Link href="/updates" className="text-sm font-semibold text-[#C40C0C] hover:text-[#a00a0a]">Explore newsroom</Link>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {insightCards.map((post, index) => (
+                <article key={post.id} className="rounded-[1.2rem] border border-[#f0ddd1] bg-white p-4">
+                  <div className="relative h-36 overflow-hidden rounded-lg">
+                    <ContentImage
+                      src={(Array.isArray(post.media) && post.media[0]?.url) || stockImages[(index + 2) % stockImages.length]}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h4 className="mt-4 line-clamp-2 text-lg font-semibold text-[#111827]">{post.title}</h4>
+                  <p className="mt-2 line-clamp-3 text-sm leading-7 text-slate-600">{excerpt(post.summary)}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-14 rounded-[2rem] border border-[#ead9cc] bg-[#fffcf8] p-6 sm:p-8">
+            <div className="mb-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#CC561E]">Client voices</p>
+              <h3 className="mt-2 text-3xl font-semibold tracking-[-0.03em] text-[#111827]">Why communication teams stick with Mediyao</h3>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {testimonialCards.map((item) => (
+                <article key={item.name} className="rounded-xl border border-[#f1e1d4] bg-white p-5">
+                  <p className="text-sm leading-7 text-slate-700">"{item.quote}"</p>
+                  <p className="mt-4 text-sm font-semibold text-[#111827]">{item.name}</p>
+                  <p className="text-xs text-slate-500">{item.role}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-14 overflow-hidden rounded-[2rem] bg-[#f4be00]">
+            <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="p-7 sm:p-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5a2e00]">Weekly newsroom digest</p>
+                <h3 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-[#3a1f00]">Get campaign ideas, release examples, and media tips in your inbox.</h3>
+                <p className="mt-3 text-sm leading-7 text-[#6b3c00]">
+                  Join product marketers, founders, and communication teams receiving practical distribution insights every week.
+                </p>
+                <form className="mt-6 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
+                  <input className="rounded-full border border-[#d38d00] bg-white px-4 py-3 text-sm text-[#3a1f00] outline-none" placeholder="Your name" />
+                  <input className="rounded-full border border-[#d38d00] bg-white px-4 py-3 text-sm text-[#3a1f00] outline-none" placeholder="Work email" />
+                  <button type="button" className="rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#a00a0a]">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+              <div className="relative min-h-[280px]">
+                <ContentImage src={stockImages[4]} alt="Newsletter section visual" fill className="object-cover" />
+              </div>
+            </div>
+          </section>
 
           <div className="mt-14 rounded-[2rem] bg-[linear-gradient(120deg,#C40C0C_0%,#FF6500_100%)] p-8 text-white">
             <p className="text-xs uppercase tracking-[0.2em] text-white/80">Need wider media pickup?</p>
