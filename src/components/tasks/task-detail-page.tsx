@@ -251,13 +251,13 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#1A1A33] text-white">
       <NavbarShell />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <SchemaJsonLd data={schemaPayload} />
         <Link
           href={taskConfig?.route || "/"}
-          className="mb-6 inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+          className="mb-6 inline-flex items-center text-sm text-white/80 hover:text-white"
         >
           ← Back to {taskConfig?.label || "posts"}
         </Link>
@@ -276,13 +276,13 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
                     Official press release
                   </p>
                 ) : null}
-                <h1 className="text-4xl font-semibold leading-tight text-foreground">
+                <h1 className="text-4xl font-semibold leading-tight text-white">
                   {post.title}
                 </h1>
                 {isPressRelease && articleSummary ? (
-                  <p className="text-lg leading-8 text-slate-600">{articleSummary}</p>
+                  <p className="text-lg leading-8 text-white/80">{articleSummary}</p>
                 ) : null}
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/70">
                   <span className="inline-flex items-center gap-1.5">
                     <UserCircle2 className="h-4 w-4" />
                     {articleAuthor}
