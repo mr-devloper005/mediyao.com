@@ -18,7 +18,7 @@ export async function TaskDetailPageOverride({ slug }: { task: TaskKey; slug: st
   return (
     <div className="min-h-screen bg-white text-neutral-900">
       <NavbarShell />
-      <section className="bg-neutral-900 py-14 text-white">
+      <section className="bg-[#1A1A33] py-14 text-white">
         <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
           <h1 className="mx-auto max-w-5xl text-4xl font-black uppercase leading-tight tracking-[0.02em] sm:text-5xl">{post.title}</h1>
           <div className="mt-5 flex items-center justify-center gap-3 text-sm text-neutral-300">
