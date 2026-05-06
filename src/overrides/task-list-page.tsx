@@ -26,7 +26,6 @@ export async function TaskListPageOverride(_: { task: TaskKey; category?: string
               <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#CC561E]">{String((post.content as any)?.category || 'Update')}</p>
               <h1 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-black uppercase leading-tight tracking-[0.02em] text-[#0f172a] sm:text-4xl">{post.title}</h1>
               <div className="mt-4 flex items-center justify-center gap-3 text-sm text-slate-600">
-                <span className="bg-[#0d1b49] px-3 py-1 text-white">{new Date(post.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                 <span>by {post.authorName || 'Editorial desk'}</span>
               </div>
               <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-slate-700">{excerpt(post.summary)}</p>
