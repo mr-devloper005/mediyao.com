@@ -78,7 +78,7 @@ export default function AboutPage() {
                 {SITE_CONFIG.name} helps teams share announcements with confidence. Our newsroom-ready format keeps releases clean, readable, and distribution-friendly.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/press-release" className="inline-flex items-center gap-2 rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold text-white hover:bg-[#a00a0a]">
+                <Link href="/press-wire" className="inline-flex items-center gap-2 rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold text-white hover:bg-[#a00a0a]">
                   Explore Releases
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -91,7 +91,7 @@ export default function AboutPage() {
               <div className="relative h-full min-h-[320px]">
                 <ContentImage
                   src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1400"
-                  alt="Press release editorial team planning media strategy"
+                  alt="Press wire editorial team planning media strategy"
                   fill
                   className="object-cover"
                 />

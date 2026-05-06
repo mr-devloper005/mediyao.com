@@ -119,17 +119,6 @@ export default function ContactPage() {
               </form>
             </div>
             <aside className="space-y-5">
-              {[
-                ['Telephone Hours', 'Monday to Friday\n8:30am to 5:00pm (PDT)'],
-                ['Toll Free Telephone', '1-888-880-9539\n(646) 417-8294'],
-                ['US Address', 'Suite 1400 - 505 Second Avenue\nSeattle, WA\n98104, USA'],
-                ['Canada Address', 'Suite 203 - 901 West 3rd St\nNorth Vancouver, BC\nV7P 3P9, Canada'],
-              ].map(([title, body]) => (
-                <div key={title} className="rounded-[1.3rem] border border-[#f0d8c8] bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
-                  <h2 className="text-lg font-semibold text-[#0f172a]">{title}</h2>
-                  <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600">{body}</p>
-                </div>
-              ))}
             </aside>
           </section>
         </main>

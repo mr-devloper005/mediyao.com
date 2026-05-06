@@ -32,7 +32,7 @@ export function NavbarOverride() {
       <div className="border-t border-neutral-200">
         <div className="mx-auto flex max-w-6xl items-center justify-center gap-6 px-4 py-4 text-sm uppercase tracking-[0.08em] sm:px-6">
           <Link href="/" className="text-[#4a90ff]">Home</Link>
-          <Link href="/press-release" className="hover:text-black">Press Releases</Link>
+          <Link href="/press-wire" className="hover:text-black">Press Releases</Link>
           <Link href="/pricing" className="hover:text-black">Pricing</Link>
           <Link href="/signin" className="hover:text-black">Sign In</Link>
           <Link href="/signup" className="hover:text-black">Sign Up</Link>

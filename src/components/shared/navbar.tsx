@@ -112,7 +112,7 @@ export function Navbar() {
   if (isPresswireProduct) {
     const pressNav = [
       { name: 'Home', href: '/' },
-      { name: primaryTask?.label || 'Press Releases', href: '/press-release' },
+      { name: primaryTask?.label || 'Press Releases', href: '/press-wire' },
       { name: 'Pricing', href: '/pricing' },
       { name: 'Sign In', href: '/signin' },
       { name: 'Sign Up', href: '/signup' },

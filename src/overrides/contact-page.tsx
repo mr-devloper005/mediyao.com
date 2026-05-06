@@ -11,7 +11,7 @@ export function ContactPageOverride() {
       <main className="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 lg:px-8">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.24em] text-[#CC561E]">Support</p>
         <h1 className="mt-3 text-center text-5xl font-semibold tracking-[-0.05em] text-[#0f172a]">Contact Us</h1>
-        <div className="mx-auto mt-12 grid max-w-6xl gap-8 lg:grid-cols-[1fr_280px]">
+        <div className="mx-auto mt-12 max-w-6xl">
           <section className="rounded-[2rem] border border-[#f1d7c8] bg-white p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)] sm:p-7">
             <form className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -82,46 +82,6 @@ export function ContactPageOverride() {
               </button>
             </form>
           </section>
-
-          <aside className="space-y-6">
-            <div className="rounded-[1.6rem] border border-[#f1d7c8] bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#0f172a]">Telephone Hours:</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600">
-                Monday to Friday
-                <br />
-                8:30am to 5:00pm Pacific (PDT)
-              </p>
-            </div>
-            <div className="rounded-[1.6rem] border border-[#f1d7c8] bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#0f172a]">Toll Free Telephone:</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600">
-                1-888-880-9539
-                <br />
-                1-646-417-8294
-              </p>
-            </div>
-            <div className="rounded-[1.6rem] border border-[#f1d7c8] bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.0
-6)]">
-              <h2 className="text-lg font-semibold text-[#0f172a]">US Address:</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600">
-                Suite 1400 - 505 Second Avenue
-                <br />
-                Seattle, WA
-                <br />
-                98104, USA
-              </p>
-            </div>
-            <div className="rounded-[1.6rem] border border-[#f1d7c8] bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#0f172a]">Canada Address:</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600">
-                Suite 203 - 901 West 3rd St.
-                <br />
-                North Vancouver, BC
-                <br />
-                V7P 3P9, Canada
-              </p>
-            </div>
-          </aside>
         </div>
 
         <section className="mx-auto mt-16 max-w-6xl overflow-hidden rounded-[2rem] bg-[linear-gradient(120deg,#C40C0C_0%,#FF6500_100%)] p-8 text-white shadow-[0_18px_46px_rgba(15,23,42,0.10)]">
