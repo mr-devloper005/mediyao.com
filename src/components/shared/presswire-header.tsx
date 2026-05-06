@@ -12,8 +12,7 @@ export function PresswireHeader() {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Press releases', href: '/press-release' },
-    { name: 'Pricing', href: '/pricing' },
+    { name: 'Press wire', href: '/press-wire' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ]
@@ -24,9 +23,9 @@ export function PresswireHeader() {
       <header className="bg-[#1A1A33] sticky top-0 z-40 w-full text-white">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
-            {/* Site Title */}
-            <Link href="/" className="text-2xl font-bold text-white transition-opacity hover:opacity-85">
-              mediyao
+            {/* Logo */}
+            <Link href="/" className="transition-opacity hover:opacity-85">
+              <img src="/logo.png" alt="mediyao" className="h-14 w-auto" />
             </Link>
 
             {/* Navigation - Desktop */}
@@ -63,14 +62,7 @@ export function PresswireHeader() {
                   asChild 
                   className="rounded-full bg-red-600 text-white hover:bg-red-700 font-semibold"
                 >
-                  <Link href="/press-release">Explore releases</Link>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  asChild 
-                  className="rounded-full border-white bg-white/10 text-white hover:bg-white/20 font-semibold backdrop-blur-sm"
-                >
-                  <Link href="/pricing">View pricing</Link>
+                  <Link href="/press-wire">Explore releases</Link>
                 </Button>
               </div>
 
@@ -118,17 +110,8 @@ export function PresswireHeader() {
                     asChild 
                     className="w-full rounded-full bg-red-600 text-white hover:bg-red-700 font-semibold"
                   >
-                    <Link href="/press-release" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link href="/press-wire" onClick={() => setIsMobileMenuOpen(false)}>
                       Explore releases
-                    </Link>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    asChild 
-                    className="w-full rounded-full border-white bg-white/10 text-white hover:bg-white/20 font-semibold backdrop-blur-sm"
-                  >
-                    <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>
-                      View pricing
                     </Link>
                   </Button>
                 </div>

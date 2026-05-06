@@ -33,19 +33,19 @@ export async function HomePageOverride() {
     {
       quote:
         'Mediyao helped our startup turn one launch update into repeat pickups across niche and mainstream outlets.',
-      name: 'Ananya Patel',
+      name: 'Sarah Mitchell',
       role: 'PR Lead, Northwell Labs',
     },
     {
       quote:
         'The release template and analytics made our communication workflow faster and easier to report internally.',
-      name: 'Rohan Mehta',
+      name: 'James Carter',
       role: 'Communications Manager, VistaraX',
     },
     {
       quote:
         'Instead of publishing and hoping, we now track engagement and iterate our headlines release by release.',
-      name: 'Mira Kapoor',
+      name: 'Lauren Brooks',
       role: 'Brand Strategist, SignalCraft',
     },
   ]
@@ -73,9 +73,6 @@ export async function HomePageOverride() {
                 <Link href="/updates" className="inline-flex items-center gap-2 rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold transition hover:bg-[#a00a0a]">
                   Explore releases
                   <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link href="/pricing" className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold transition hover:bg-white/16">
-                  View pricing
                 </Link>
               </div>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -116,13 +113,11 @@ export async function HomePageOverride() {
               <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
                 <div className="p-7 sm:p-9">
                   <p className="inline-flex rounded-full bg-[#F6CE71]/35 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#8a3a18]">
-                    Featured press release
+                    Featured press wire
                   </p>
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">{featured.title}</h2>
                   <p className="mt-4 text-sm leading-8 text-slate-600">{excerpt(featured.summary)}</p>
                   <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-                    <span>{new Date(featured.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                    <span className="h-1 w-1 rounded-full bg-slate-300" />
                     <span>{featured.authorName || 'Mediyao Editorial Desk'}</span>
                   </div>
                   <Link href={`/updates/${featured.slug}`} className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#C40C0C] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#a00a0a]">
@@ -159,13 +154,10 @@ export async function HomePageOverride() {
                     />
                   </div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#CC561E]">
-                    {String((post.content as any)?.category || 'Press release')}
+                    {String((post.content as any)?.category || 'Press wire')}
                   </p>
                   <h3 className="mt-3 line-clamp-2 text-xl font-semibold leading-snug text-[#111827]">{post.title}</h3>
                   <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-600">{excerpt(post.summary)}</p>
-                  <div className="mt-4 text-xs text-slate-500">
-                    {new Date(post.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                  </div>
                   <Link href={`/updates/${post.slug}`} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#C40C0C]">
                     Open release
                     <ArrowRight className="h-4 w-4" />
@@ -286,9 +278,6 @@ export async function HomePageOverride() {
             <p className="text-xs uppercase tracking-[0.2em] text-white/80">Need wider media pickup?</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-[-0.03em]">Choose a plan built for consistent release velocity.</h3>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/pricing" className="inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#9e1c00]">
-                See pricing plans
-              </Link>
               <Link href="/contact" className="inline-flex rounded-full border border-white/40 bg-white/10 px-5 py-3 text-sm font-semibold">
                 Contact newsroom support
               </Link>
